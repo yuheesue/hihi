@@ -1,6 +1,4 @@
 # hihi
 
-My service to you.
-thank you
-
-halo
+git config --global user.name "Yu Heesue" 
+git config --global user.email "yhsue27@naver.com"
