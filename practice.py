@@ -1079,7 +1079,7 @@ while(True):
 
 from theater_module import price_soldier as price
 #price_soldier를 price로 별명
-price(6)'''
+price(6)
 
 # ###11-2 패키지
 # import travel.thailand
@@ -1098,6 +1098,64 @@ price(6)'''
 
 #from random import * 로 쓴적있음
 from travel import * #
-# trip_to = vietnam.VietnamPackage()
-trip_to = thailand.ThailandPackage()
-trip_to.detail()
+# # trip_to = vietnam.VietnamPackage()
+# trip_to = thailand.ThailandPackage()
+# trip_to.detail()
+
+import inspect
+import random
+print(inspect.getfile(random))
+print(inspect.getfile(thailand)) ##위치 확인 가능
+#pip로 package설치, pypi에서 
+
+###11-7 내장함수
+#input : 사용자 입력을 받는 함수
+#dir : 어떤 객체를 넘겨줫을 때 그 객체가 어떤 변수와 함수를 가지고 있는지 표시
+# print(dir())
+import random #외장함수
+# print(dir())
+# import pickle
+# print(dir())
+
+print(dir(random))
+#list of python builtins를 검색하면 내장함수 목록 나옴
+
+# ###외장함수
+# #list of python module 검색하면 목록 볼수있음
+
+# #glob : 경로 내의 폴더 / 파일 목록 조회 (윈도우 dir)
+# import glob
+# print(glob.glob("*.py")) #확장자가 py 인 모든파일
+
+# #os : 운영체제에서 제공하는 기본기능
+# import os
+# print(os.getcwd()) #현재 디렉토리
+
+# folder = "sample_dir"
+
+# if os.path.exists(folder):
+#     print("이미 존재하는 폴더입니다.")
+#     os.rmdir(folder)
+#     print(folder, "폴더를 삭제하였습니다.")
+# else:
+#     os.makedirs(folder) #포더 생성
+#     print(folder, "폴더를 생성하였습니다.")
+
+# print(os.listdir())
+
+import time
+print(time.localtime())
+print(time.strftime("%Y-%m-%d %H-%M-%S"))
+
+import datetime
+print("오늘 날짜는", datetime.date.today())
+
+#timedelta : 두 날짜 사이의 간격
+today = datetime.date.today() #오늘 날짜 저장
+td = datetime.timedelta(days = 100) #100일 저장
+print("우리가 만난지 100일은", today + td) #오늘부터 100일후'''
+
+
+##퀴즈 10
+import byme
+byme.sign()
