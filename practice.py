@@ -778,7 +778,7 @@ def attack(name, location, damage):
 
 attack(name, "1시", damage)
 attack(tank_name, "1시", tank_damage)
-attack(tank2_name, "1시", tank2_damage)'''
+attack(tank2_name, "1시", tank2_damage)
 
 class Unit:
     def __init__(self, name, hp, damage):
@@ -808,3 +808,247 @@ wraith2.clocking = True #외부에서 변수 추가 할당
 #class외부에서 내가 원하는 변수 확장 가능, 확장한 객체에만 적용됨
 if wraith2.clocking == True:
     print("{0} 는 현재 클로킹 상태입니다.".format(wraith2.name))
+
+###9-4 메소드
+#일반 유닛
+class Unit:
+    def __init__(self, name, hp, damage):
+        #__init__ 파이썬에서 쓰이는 생성자. 객체가 만들어질때 자동호출
+        self.name =name #멤버변수,class내의 정의된 변수
+        self.hp = hp
+        self.damage = damage
+        print("{0} 유닛이 생성 되었습니다.".format(self.name))
+        print("체력 {0}, 공격력 {1}".format(self.hp, self.damage))
+
+
+class AttackUnit:
+    def __init__(self, name, hp, damage):
+    #__init__ 파이썬에서 쓰이는 생성자. 객체가 만들어질때 자동호출
+        self.name =name #멤버변수,class내의 정의된 변수
+        self.hp = hp
+        self.damage = damage
+
+#공격 유닛/ self는 자기자신을 의미
+    def attack(self, location):
+        print("{0} : {1} 방향으로 적군을 공격 합니다.[공격력 {2}]"\
+            .format(self.name, location, self.damage))
+            #self 붙어있는건 위에 정의된것,  안붙어 있는건 전달받은 값
+    
+    def damaged(self, damage):
+        print("{0} : {1} 데미지를 입었습니다.".format(self.name, damage))
+        self.hp -= damage
+        print("{0} : 현재 체력은 {1} 입니다.".format(self.name, self.hp))
+        if self.hp <=0:
+            print("{0} : 파괴되었습니다.".format(self.name))
+
+
+#파이어뱃 : 공격 유닛, 화염방사기.
+firebat1 = AttackUnit("파이어뱃", 50, 16)
+firebat1.attack("5시")
+
+#공격 2번 받는다고 가정
+firebat1.damaged(25)
+firebat1.damaged(25)
+
+###상속
+#메딕 : 의무병
+class Unit:
+    def __init__(self, name, hp):
+        self.name =name 
+        self.hp = hp
+
+class AttackUnit(Unit): #일반 유닛을 중복되는 이름과 hp를 상속받아서 만들어지는것.
+    def __init__(self, name, hp, damage):
+        Unit.__init__(self, name, hp)
+        self.damage = damage
+
+
+#드랍쉽 : 공중 유닛, 수송기. 마린 / 파이어뱃 / 탱크 등을 수송. 공격 불가
+
+class Unit:
+    def __init__(self, name, hp):
+        self.name =name 
+        self.hp = hp
+
+class AttackUnit(Unit): #일반 유닛을 중복되는 이름과 hp를 상속받아서 만들어지는것.
+    def __init__(self, name, hp, damage):
+        Unit.__init__(self, name, hp)
+        self.damage = damage
+
+#공격 유닛/ self는 자기자신을 의미
+    def attack(self, location):
+        print("{0} : {1} 방향으로 적군을 공격 합니다.[공격력 {2}]"\
+            .format(self.name, location, self.damage))
+            #self 붙어있는건 위에 정의된것,  안붙어 있는건 전달받은 값
+    
+    def damaged(self, damage):
+        print("{0} : {1} 데미지를 입었습니다.".format(self.name, damage))
+        self.hp -= damage
+        print("{0} : 현재 체력은 {1} 입니다.".format(self.name, self.hp))
+        if self.hp <=0:
+            print("{0} : 파괴되었습니다.".format(self.name))
+
+#날수 있는 기능을 가진 클래스
+class Flyable:
+    def __init__(self, flying_Speed):
+        self.flying_speed =flying_Speed
+
+    def fly(self, name, location):
+        print("{0} : {1} 방향으로 날아갑니다. [속도{2}]"\
+            .format(name, location, self.flying_speed))
+
+    
+#공중 공격 유닛 클래스
+class FlyableAttackUnit(AttackUnit,Flyable):
+    def __init__(self, name, hp, damage, flying_speed):
+        AttackUnit.__init__(self, name, hp, damage)
+        Flyable.__init__(self, flying_speed)
+
+
+#발키리 : 공중 공격 유닛, 한번에 14발 미사일 발사
+valkyrie = FlyableAttackUnit("발키리", 200, 6, 5)
+valkyrie.fly(valkyrie.name, "3시")
+
+
+class BuildingUnit(Unit):
+    def __init__(self, name, hp, location):
+        #Unit.__init__(self, name, hp, 0)
+        super().__init(name, hp, 0)
+        #super와 Unit으로 사용되는건 똑같지만 super에서는 뒤에 ()를 붙이고, self를 안쓰는 차이가 있음
+        self.location = location
+
+###간단하게 class 와 상속에 대해 
+class Unit:
+    def __init__(self):
+        print("Unit 생성자")
+
+class Flyable:
+    def __init__(self):
+        print("Flyable 생성자")
+
+class FlyableUnit(Unit, Flyable):
+    def __init__(self):
+        #super().__init__()
+#다중 상속시 super를 이용하면 맨처음에 사용되는 class만 호출됨.
+        Unit.__init__(self)
+        Flyable.__init__(self)    
+#두개를 다 호출하기 위해서는 각자 따로 init함수로 호출해줘야함
+
+#드랍쉽
+dropship = FlyableUnit()
+
+
+##퀴즈8
+
+class House:
+    def __init__(self, location, house_type, deal_type, price, completion_year):
+        self.location = location
+        self.house_type = house_type
+        self.deal_type = deal_type
+        self.price = price
+        self.completion_year = completion_year
+
+    def show_detail(self):
+        print("{0} {1} {2} {3} {4}"\
+            .format(self.location, self.house_type, self.deal_type, self.price, self.completion_year))
+
+print("총 3대의 매물이 있습니다.")
+h1 = House("강남", "아파트", "매매", "10억", "2010년")
+h1.show_detail()
+h2 = House("마포", "오피스텔", "전세", "5억", "2007년")
+h2.show_detail()
+h3 = House("송파", "빌라", "월세", "500/50", "2000년")
+h3.show_detail()
+
+###10-1 예외처리
+
+try:
+    print("나누기 전용 계산기입니다.")
+    nums = []
+    nums.append(int(input("첫번째 숫자를 입력하세요 :")))
+    nums.append(int(input("두번째 숫자를 입력하세요 :")))
+    #nums.append(nums[0] / nums[1])
+    print("{0} / {1} = {2}".format(nums[0],nums[1],nums[2]))
+
+except ValueError:
+    print("에러! 잘못된 값을 입력하였습니다!")
+except ZeroDivisionError as err:
+    print(err)
+except Exception as err:
+    print("알 수 없는 에러가 발생하였습니다.")
+    print(err)
+
+
+##10-2에러 발생시키기 
+
+try:
+    print("한 자리 숫자 나누기 전용 계산기 입니다.")
+    num1 = int(input("첫번째 숫자를 입력하세요 :"))
+    num2 = int(input("두번째 숫자를 입력하세요 :"))
+    if num1>= 10 or num2 >=10:
+        raise ValueError
+    print("{0} / {1} = {2}.".format(num1, num2, int(num1/num2)))
+except ValueError:
+    print("잘못된 값을 입력하였습니다. 한 자리 숫자만 입력하세요.")
+
+
+##10-3 사용자 정의 예외처리
+class BigNumberError(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    
+    def __str__(self):
+        return self.msg
+
+try:
+    print("한 자리 숫자 나누기 전용 계산기 입니다.")
+    num1 = int(input("첫번째 숫자를 입력하세요 :"))
+    num2 = int(input("두번째 숫자를 입력하세요 :"))
+    if num1>= 10 or num2 >=10:
+        raise BigNumberError("입력값 : {0}, {1}".format(num1, num2))
+    print("{0} / {1} = {2}.".format(num1, num2, int(num1/num2)))
+except ValueError:
+    print("잘못된 값을 입력하였습니다. 한 자리 숫자만 입력하세요.")
+except BigNumberError as err:
+    print("에러가 발생하였습니다. 한 자리 숫자만 입력하세요.")
+    print(err)
+finally: #오류가 나거나 정상적으로 작동해도 정상적으로 종료
+    print("계산기를 이용해주셔서 감사합니다.")'''
+
+
+####퀴즈9
+class SoldOutError(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+    def __str__(self):
+        return self.msg
+
+chicken = 10
+waiting = 1
+while(True):
+
+    try:
+        print("[남은 치킨 : {0}]".format(chicken))
+        order = int(input("치킨 몇 마리 주문하시겠습니까?"))
+        if order > chicken:
+            print("재료가 부족합니다.")
+        
+        elif order > 0 and order < chicken:
+            print("[대기번호 {0}] {1} 마리 주문이 완료되었습니다."\
+                .format(waiting, order))
+            waiting += 1
+            chicken -= order
+        
+        elif order == chicken:
+            raise SoldOutError("")
+        
+        else:
+            raise ValueError
+        
+    except ValueError:
+        print("잘못된 값을 입력하였습니다.")
+
+    except SoldOutError:
+        print("재고가 소진되어 더 이상 주문을 받지 않습니다.")
+        break
