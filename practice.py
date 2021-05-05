@@ -1013,7 +1013,7 @@ except BigNumberError as err:
     print("에러가 발생하였습니다. 한 자리 숫자만 입력하세요.")
     print(err)
 finally: #오류가 나거나 정상적으로 작동해도 정상적으로 종료
-    print("계산기를 이용해주셔서 감사합니다.")'''
+    print("계산기를 이용해주셔서 감사합니다.")
 
 
 ####퀴즈9
@@ -1052,3 +1052,46 @@ while(True):
     except SoldOutError:
         print("재고가 소진되어 더 이상 주문을 받지 않습니다.")
         break
+
+
+###11-1모듈
+
+# import theater_module
+# theater_module.price(3) #3명이서 영화 보러 갔을때
+# theater_module.price_morning(4) #4명이서 조조할인 영화
+# theater_module.price_soldier(5)
+
+# import theater_module as mv #as 뒤에를 붙이면 mv로 언급가능
+# mv.price(3)
+# mv.price_morning(4)
+# mv.price_soldier(5)
+
+# from theater_module import *
+# #from random import * #앞에 theater module필요없이 모든걸 다 사용하겠다.
+# price(3)
+# price_morning(4)
+# price_soldier(5)
+
+# from theater_module import price, price_morning
+# price(5)
+# price_morning(6)
+# price_soldier(7) #error남
+
+from theater_module import price_soldier as price
+#price_soldier를 price로 별명
+price(6)'''
+
+# ###11-2 패키지
+# import travel.thailand
+# # import travel.thailand.ThailandPackage()
+# #import 구문에서 바로 class언급은 안됨.
+# trip_to = travel.thailand.ThailandPackage()
+# trip_to.detail()
+
+from travel.thailand import ThailandPackage
+trip_to = ThailandPackage()
+trip_to.detail()
+
+from travel import vietnam
+trip_to = vietnam.VietnamPackage()
+trip_to.detail()
