@@ -1,3 +1,4 @@
+#clear 21.05.08
 def solution(lottos, win_nums):
     
     i = 0
