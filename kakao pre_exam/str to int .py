@@ -1,3 +1,4 @@
+    #clear 21.05.08
 def solution(s):
 
     s = s.replace("one","1")
