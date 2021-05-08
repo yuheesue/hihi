@@ -1,37 +1,24 @@
 def solution(lottos, win_nums):
     
+    i = 0
+    for n in range(6):
+        if lottos[n] in win_nums:
+            i += 1
 
-    
-    win_nums.find(lottos[0])
-    if True:
+    if lottos.count(0) == 0 and i == 0: #아무것도 안맞고, 아무것도 지워지지 않은 경우 예외처리
+        i += 1
+
+    high = 7 - (lottos.count(0)+i)
+
+    if i == 0:  #아무것도 안맞고, 다 지워졌을때의 예외처리
         i += 1
     
-    win_nums.find(lottos[1])
-    if True:
-        i += 1
-
-    win_nums.find(lottos[2])
-    if True:
-        i += 1
-
-    win_nums.find(lottos[3])
-    if True:
-        i += 1
-
-    win_nums.find(lottos[4])
-    if True:
-        i += 1
-
-    win_num.find(lottos[5])
-    if True:
-        i += 1
-
-    high = 7 - (win_num.count("0")+i)
     low = 7 - i
-    answer = [ low , high ]
+
+    answer = [ high , low ]
 
     return answer
 
-a = [44,1,0,0,31,25]
-b = [31,10,45,1,6,19]
+a = [1, 2, 5, 6, 7, 8]
+b = [20, 9, 3, 45, 4, 35]
 print(solution(a,b))
