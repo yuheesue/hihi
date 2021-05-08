@@ -35,6 +35,7 @@ def solution(s):
 
 
     answer = s
+    print(answer)
     return answer
 
-    print(solution)
+    solution()
