@@ -1153,9 +1153,31 @@ print("오늘 날짜는", datetime.date.today())
 #timedelta : 두 날짜 사이의 간격
 today = datetime.date.today() #오늘 날짜 저장
 td = datetime.timedelta(days = 100) #100일 저장
-print("우리가 만난지 100일은", today + td) #오늘부터 100일후'''
+print("우리가 만난지 100일은", today + td) #오늘부터 100일후
 
 
 ##퀴즈 10
 import byme
 byme.sign()
+
+####itertools함수들
+import itertools
+#permutation
+arr = ['A', 'B', 'C']
+nPr = itertools.permutations(arr, 2)
+print(list(nPr))    #[('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('C', 'A'), ('C', 'B')]
+
+#combinations
+import itertools
+arr = ['A', 'B', 'C']
+nCr = itertools.combinations(arr, 2)
+print(list(nCr))    #[('A', 'B'), ('A', 'C'), ('B', 'C')]
+
+eval() #str식, 함수도 다 연산해주는 무적의 계산함수, 하지만 해킹당하기 쉬우며 의존성이 높아져 최대한 쓰는거 자제
+
+'''
+a = [1, 2, 3]
+for n in range(3):
+    a[n]+=a[n]
+b = [1,3,4]
+print(a[n])
