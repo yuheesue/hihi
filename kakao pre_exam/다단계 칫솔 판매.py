@@ -1,38 +1,18 @@
-from math import*
 def solution(enroll, referral, seller, amount):
-    seller_new = []
-    amount_new = []
-    enroll_money = []
     answer =[]
 
-    
-        
-    for n in range(len(seller)) :
-        if seller_new.count(seller[n]) >0: #find -> count
-            index1 = seller_new.index(seller[n])
-            amount_new[index1] += amount[n]*100
-        else:    
-            seller_new.append(seller[n]) #seller_new[n] = seller[n]
-            amount_new.append(amount[n]*100) #amount_new[n] = amount[n]
-
-
-
-
     for m in range(len(enroll)):
-        if seller_new.count(enroll[m])==1:
-            index2 = seller_new.index(enroll[m])
-            enroll_money.append(amount_new[index2]) #enroll_money[m] = amount_new[index2]
-            answer.append(enroll_money[m])
+        if seller.count(enroll[m])==1:
+            index2 = seller.index(enroll[m])
+            answer.append(amount[index2]*100)
                 #anaswer[m] = enroll_money[m]
         else:
-            enroll_money.append(0)
-            answer.append(enroll_money[m])
-
+            answer.append(0)
 
     
-    for a in range(8):
+    for a in range(len(enroll)):
 
-        if enroll_money[a] != 0:
+        if answery[a] != 0:
             interest = int(answer[a] * 0.1)
             if interest >=1:  #이자율
                 answer[a] -= interest   #이자율 뺀 금액
