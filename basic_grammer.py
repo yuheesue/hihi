@@ -1176,8 +1176,9 @@ print(list(nCr))    #[('A', 'B'), ('A', 'C'), ('B', 'C')]
 eval() #str식, 함수도 다 연산해주는 무적의 계산함수, 하지만 해킹당하기 쉬우며 의존성이 높아져 최대한 쓰는거 자제
 
 '''
+#배열에 더해서 for문 돌릸 있음
 a = [1, 2, 3]
-for n in range(3):
-    a[n]+=a[n]
 b = [1,3,4]
-print(a[n])
+for n in range(3):
+    a[n]+=b[n]
+    print(a[n])
