@@ -1,31 +1,26 @@
 def solution(enroll, referral, seller, amount):
-    enroll_plus = []
-    referral_plus = []
-    answer_plus = []
+    answer_fo = []
     answer =[]
 
     for m in range(len(enroll)):
         if seller.count(enroll[m])==1:
             index = seller.index(enroll[m])
             answer.append(amount[index]*100)
+            answer_fo.append(amount[index]*100)
             
         elif seller.count(enroll[m])>1:
-            answer[m] = []  #
             index = seller.index(enroll[m])
-            answer[m].append(amount[index]*100)#
+            answer[m].append(amount[index]*100)
+            answer_fo.append(amount[index]*100)
+
 
             for i in range(seller.count(enroll[m])-1):
-                index = seller.index(enroll[m], index)
-                answer[m].append(amount[index]*100)#
-                enroll_plus.append(enroll[m])
-                referral_plus.append(referral[m])
+                index = seller.index(enroll[m], index+1)
+                answer[m] += amount[index]*100
+                answer_fo.append(amount[index]*100)
 
         else:
             answer.append(0)
-
-    enroll.extend(enroll_plus)
-    referral.extend(referral_plus)
-    answer.extend(answer_plus)
 
     for a in range(len(answer)):
 
@@ -61,3 +56,7 @@ q4 = [12, 4, 2, 5, 10, 10, 10, 10, 0 ]
 
 
 print(solution(q1, q2, q3, q4))
+
+# seller를 enroll 순서로 재 배열
+# 이자율에서 seller 배열에 맞는 referral를 하나 더 생성..(?) or seller count>1일때 처음 index에 referral로 이어지도록 변환
+# 두개의 for문을 하나로 합치기
