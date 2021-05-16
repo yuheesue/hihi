@@ -4,8 +4,6 @@ def solution(enroll, referral, seller, amount):
     enroll_plus = []  #중복파트 뒤에 붙이기 위함
     referral_plus = []  #중복파트 뒤에 붙이기 위함
     answer_plus = []  #중복파트 뒤에 붙이기 위함
-    referral_fo = []    #중복되는 것도 그냥 enroll순으로 다 나열해놓은것, append를 쓰므로,
-    answer_fo = []  #answer전 중복되는 것도 그냥 enroll순으로 다 나열해놓은것
     answer =[]  #중복되는 값 합해놓은, 중복 없는.
 
     for m in range(len(enroll)):
@@ -20,69 +18,59 @@ def solution(enroll, referral, seller, amount):
                 enroll_plus.append(enroll[m])
 
         elif count[m] == 0:
-            answer_fo.append(0)
-            referral_fo.append(referral[m])
+            answer.append(0)
         
         else:
             index = seller.index(enroll[m])
-            answer_fo.append(amount[index]*100)
-            referral_fo.append(referral[m])
+            answer.append(amount[index]*100)
 
 
     enroll.extend(enroll_plus)
-    referral_fo.extend(referral_plus)
-    answer_fo.extend(answer_plus)
+    referral.extend(referral_plus)
+    answer.extend(answer_plus)
 
-    print(enroll)
-    print(referral)
-    print(seller)
-    print(referral_fo)
 
-    for a in range(7):
-        if answer_fo[a] != 0 :  #0이 아닐때
+    for a in range(len(enroll)):
+        if answer[a] != 0 :  #0이 아닐때
             if a<8:   
-                interest = int(answer_fo[a] * 0.1)
+                interest = int(answer[a] * 0.1)
 
                 if interest >=1:  #이자율
-                    answer_fo[a] -= interest   #이자율 뺀 금액
+                    answer[a] -= interest   #이자율 뺀 금액
 
                 while(interest>=1):    
-                    if referral_fo[a] != "-": #b변수를 이용하기 위해 
-                        b = enroll.index(referral_fo[a]) #referral을 enroll로 옮기기 위한 위치찾기
-                        '''print(seller[b])
-                        print(referral_fo[a])
-                        print(enroll[b])
-                        print(answer_fo[b])'''
+                    if referral[a] != "-": #b변수를 이용하기 위해 
+                        b = enroll.index(referral[a]) #referral을 enroll로 옮기기 위한 위치찾기
 
                         if interest*0.1 >=1:
-                            answer_fo[b] += (interest - int(interest*0.1))
+                            answer[b] += (interest - int(interest*0.1))
                             interest = int(interest *0.1)
                             a = b
                         else:
-                            answer_fo[b] += interest                          
+                            answer[b] += interest                          
                             break
 
                     else:
                         break
 
             elif a>8:  
-                interest = int(answer_fo[a] * 0.1)
+                interest = int(answer[a] * 0.1)
 
                 if interest >=1:  #이자율
-                    answer_fo[a] -= interest   #이자율 뺀 금액
+                    answer[a] -= interest   #이자율 뺀 금액
                     w = enroll.index(enroll[a])
-                    answer_fo[w] += answer_fo[a] 
+                    answer[w] += answer[a] 
 
                 while(interest>=1):    
-                    if referral_fo[a] != "-": #b변수를 이용하기 위해 
-                        b = enroll.index(referral_fo[a]) #referral을 enroll로 옮기기 위한 위치찾기
+                    if referral[a] != "-": #b변수를 이용하기 위해 
+                        b = enroll.index(referral[a]) #referral을 enroll로 옮기기 위한 위치찾기
 
                         if interest*0.1 >=1:
-                            answer_fo[b] += (interest - int(interest*0.1))
+                            answer[b] += (interest - int(interest*0.1))
                             interest = int(interest *0.1)
                             a = b
                         else:
-                            answer_fo[b] += interest
+                            answer[b] += interest
                             break
 
                     else:
@@ -91,8 +79,11 @@ def solution(enroll, referral, seller, amount):
 
         else:
             continue
-            
-    return answer_fo
+
+    
+    del answer[8:]
+
+    return answer
 
 q1 = ["john", "mary", "edward", "sam",    "emily", "jaimie", "tod",     "young"]
 q2 = ["-"   , "-"   , "mary"  , "edward", "mary",   "mary",  "jaimie", "edward"]
