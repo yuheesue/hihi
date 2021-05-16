@@ -11,6 +11,7 @@ def solution(enroll, referral, seller, amount):
         
         if int(count[m]) > 1:
             index = seller.index(enroll[m])
+            answer.append(amount[index]*100)
             for i in range(count[m]-1):
                 index = seller.index(enroll[m], index+1)
                 answer_plus.append(amount[index]*100)
@@ -53,13 +54,14 @@ def solution(enroll, referral, seller, amount):
                     else:
                         break
 
-            elif a>8:  
+            elif a>7:  
                 interest = int(answer[a] * 0.1)
 
                 if interest >=1:  #이자율
                     answer[a] -= interest   #이자율 뺀 금액
                     w = enroll.index(enroll[a])
-                    answer[w] += answer[a] 
+                    answer[w] += answer[a]
+ 
 
                 while(interest>=1):    
                     if referral[a] != "-": #b변수를 이용하기 위해 
@@ -75,20 +77,19 @@ def solution(enroll, referral, seller, amount):
 
                     else:
                         break
+        
 
 
         else:
             continue
 
-    
     del answer[8:]
-
     return answer
 
 q1 = ["john", "mary", "edward", "sam",    "emily", "jaimie", "tod",     "young"]
 q2 = ["-"   , "-"   , "mary"  , "edward", "mary",   "mary",  "jaimie", "edward"]
-q3 = ["young", "john", "tod", "emily", "mary"]
-q4 = [12, 4, 2, 5, 10]
+q3 = ["young", "john","sam", "-", "young"]
+q4 = [12, 12, 0, 0, 5 ]
 
 
 print(solution(q1, q2, q3, q4))
