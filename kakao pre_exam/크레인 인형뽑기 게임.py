@@ -1,13 +1,15 @@
 def solution(board, moves):
     basket=[]
     answer = 0
+    w = 0
+    b = 0
 
     #moves위치 인식후 해당자리 집게이동
-    for a in range(len(moves)):
+    for a in range(1):
         doll = moves[a]-1
-        print(doll)
+        #print(doll)
         colum = [ i [doll] for i in board]
-        print(colum)
+        #print(colum)
 
     #인형 구별
         for b in colum:
@@ -15,9 +17,16 @@ def solution(board, moves):
             if colum[b] != 0:
                 basket.append(colum[b]) 
                 colum[b] = 0
-                print(colum)
-                print(basket)
+                print("b!:",b)
+                print("c_b!:" , colum[b])
+                print("!c" , colum)
+                print("basket:",basket)
                 break
+
+            elif colum[b] == 0:
+                print("b:",b)
+                print("c_b:" , colum[b])
+                continue
 
         if basket[-1:] == basket[-2:-1]:
             basket.pop()
