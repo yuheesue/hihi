@@ -1,35 +1,21 @@
-def solution(board, moves):
-    basket=[]
-    answer = 0
-    w = 0
-    b = 0
-
-    #moves위치 인식후 해당자리 집게이동
-    for a in range(len(moves)):
-        doll = moves[a]-1
-        #print(doll)
-        colum = [ i [doll] for i in board]
-        #print(colum)
-
-    #인형 구별
-        for b in colum:
-            if b != 0:
-                basket.append(b)
-                idx = colum.index(b)
-                colum.pop(idx)
-                colum.insert(1,0)
-                break
-        print(colum)
-        print(basket)
-
-
-        if basket[-1:] == basket[-2:-1]:
-            basket.pop()
-            basket.pop()
-            answer +=2
-
-    return answer
-
 board =[[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]]
 moves = [1,5,3,5,1,2,1,4]
-print(solution(board, moves))
+
+basket=[]
+answer = 0
+
+
+#moves위치 인식후 해당자리 집게이동
+for a in moves:
+    for b in range(len(board[0])):
+        if board[b][a-1] != 0:
+            basket.append(board[b][a-1])
+            board[b][a-1] = 0
+
+            if len(basket)>1 and basket[-1] == basket[-2]:
+                basket.pop()
+                basket.pop()
+                answer +=2
+            break
+
+print(answer)
