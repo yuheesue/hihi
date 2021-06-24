@@ -1,6 +1,6 @@
-n = 10
-lost = [1,2,3,4,5,6,7,8,9,10]
-reserve = [1,3,5]
+n = 4
+lost = [1,2,4]
+reserve = [1,2,3]
 
 
 answer = 0
@@ -27,10 +27,10 @@ for c in reserve:
 
 for d in reserve:
     if student[d] != 2 :
-        if d == n or student[d] !=2 or student[d+1] == 1 :    #맨뒷사람O, 뒷사람 잃어버리지 X
+        if d == n  or student[d+1] == 1 :    #맨뒷사람O, 뒷사람 잃어버리지 X
             if student[d-1] == 0:    #맨앞사람, 앞사람 잃어버리지 X
                 student[d-1] = 2    #앞사람에게 2
-        elif d == n or student[d] !=2 or student[d+1] == 0 :
+        elif d == n or student[d+1] == 0 :
             if student[d-1] == 0:    #맨앞사람, 앞사람 잃어버리지 X
                 student[d-1] = 2
 
