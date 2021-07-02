@@ -34,3 +34,4 @@ for d in reserve:
 answer = n - student.count(0)
 print(answer)
 print(student)
+
