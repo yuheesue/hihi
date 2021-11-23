@@ -1244,6 +1244,8 @@
 # print(a)
 # print(b)
 
+import sys
+
 data = sys.stdin.read().splitlines()
 a = int(data[0])
 b=float(data[1])
