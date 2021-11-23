@@ -1,9 +1,9 @@
 # # print(1+1)
 
-# # print(2**3)
-# # print(10%3)
-# # print(5%2)
-# # print(10//3)
+#print(2**3)
+# print(10%3)
+# print(5%2)
+# print(10//3)
 
 # # print(10>3)
 # # print(4>=7)
@@ -1167,7 +1167,7 @@
 # nPr = itertools.permutations(arr, 2)
 # print(list(nPr))    #[('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('C', 'A'), ('C', 'B')]
 
-# #combinations
+#combinations
 # import itertools
 # arr = ['A', 'B', 'C']
 # nCr = itertools.combinations(arr, 2)
@@ -1231,3 +1231,20 @@
 # # 반복자: next() 함수로 값을 하나씩 꺼낼 수 있는 데이터
 # # iter() 함수: 반복 가능한 데이터를 입력받아 반복자를 반환하는 함수
 # # next() 함수: 반복자를 입력받아 다음 출력값을 반환하는 함수
+
+# import numpy
+
+# n,m=map(int, input().split())
+# my_array = [list(map(int, input().split())) for _ in range(m)]
+# print(my_array)
+# a = numpy.prod(my_array, axis = 0) 
+# b = numpy.prod(my_array, axis = 1)
+
+# print(a[0]*b[0])
+# print(a)
+# print(b)
+
+data = sys.stdin.read().splitlines()
+a = int(data[0])
+b=float(data[1])
+c=str(data[2])
